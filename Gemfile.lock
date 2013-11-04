@@ -145,6 +145,8 @@ DEPENDENCIES
   nokogiri (~> 1.6)
   puma (~> 2.6)
   rails (= 4.0.1)
+  rspec-expectations (~> 2.14)
+  rspec-mocks (~> 2.14)
   rspec-rails (~> 2.14)
   sass-rails (~> 4.0.0)
   sdoc

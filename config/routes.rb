@@ -5,6 +5,7 @@ RedditExam::Application.routes.draw do
   root 'welcome#index'
 
   get '/example', to: 'reddit#index'
+  post '/example', to: 'reddit#search'
 
 
   # Example of regular route:

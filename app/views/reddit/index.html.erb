@@ -1,0 +1,16 @@
+<div class='row search'>
+  <%= form_for @form, url: example_path, remote: true do |f| %>
+    <div class='col-md-3'>
+      <%= f.text_field :search, class: 'form-control', placeholder: '留空可获取首页内容' %>
+    </div>
+    <%= f.submit '搜索', class: 'btn btn-info', disable_with: '提交中' %>
+  <% end %>
+</div>
+
+<hr>
+
+<div class='row'>
+  <div class="col-md-12" id='result'>
+    <p>请点击搜索加载结果</p>
+  </div>
+</div>

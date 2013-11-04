@@ -46,6 +46,8 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 2.4'
+  gem 'rspec-mocks', '~> 2.14'
+  gem 'rspec-expectations', '~> 2.14'
 end
 
 # Use ActiveModel has_secure_password
