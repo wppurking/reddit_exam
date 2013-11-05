@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= stylesheet_link_tag "bootcss", media: "all" %>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+<div class='container'>
+  <div class='col-md-12'>
+    <h3><%= @name %> 你好, 感谢投递长沙蓝拓电子商务有限公司简历</h3>
+
+    <p>
+      邀请你完成 <%= link_to '笔试题', root_url, target: '_blank' %>.
+
+      完成之后, 请将源代码打成 zip 包 email 给
+      <%= mail_to 'wppurking@gmail.com', 'Wyatt', subject: '蓝拓笔试题 ' + Time.now.to_s(:db) %>,
+      收到笔试题目后会在 24 小时内给与答复.
+    </p>
+  </div>
+</div>
+</body>
+</html>

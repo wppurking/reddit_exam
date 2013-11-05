@@ -25,5 +25,16 @@ module RedditExam
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.precompile += %w(bootcss.css)
+
+    config.action_mailer.default_url_options = {host: 'hire.easya.cc'}
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        address: 'smtp.gmail.com',
+        port: 587,
+        user_name: 'support@easyacceu.com',
+        password: ENV['GMAIL_PASS'],
+        authentication: 'plain',
+        enable_starttls_auto: true
+    }
   end
 end
