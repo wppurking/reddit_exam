@@ -3,6 +3,10 @@
     <h3>蓝拓电子商务有限公司面试题</h3>
 
     <p>通过 Ajax 或者 Form 表单的 Post 请求向服务器发出申请抓取 <%= reddit_link %> 网站内容</p>
+    <p class='text-muted'>
+      完成后请将程序打成 zip 包联系
+      <%= mail_to 'wppurking@gmail.com', 'Wyatt', subject: '蓝拓笔试题 ' + Time.now.to_s(:db) %>
+    </p>
   </div>
 </div>
 
