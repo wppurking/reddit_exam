@@ -13,6 +13,31 @@ describe Reddit do
       it '应该返回带有关键词的搜索路径' do
         expect(form_with_word.url).to eq('http://www.reddit.com/search?q=rails')
       end
+
+      it '含有空格等特殊字符的搜索路径' do
+        form_with_word.search = 'i love u'
+        expect(form_with_word.url).to eq('http://www.reddit.com/search?q=i%20love%20u')
+      end
+
+      context 'pager_url' do
+        let(:pager_form) { RedditForm.new(count: 25, after: 't3_1pwa6v') }
+
+        it '只拥有 count, after' do
+          expect(pager_form.pager_url).to eq('http://www.reddit.com/?count=25&after=t3_1pwa6v')
+        end
+
+        it '拥有 q, count, after' do
+          pager_form.q = 'i love u'
+          expect(pager_form.pager_url).to eq('http://www.reddit.com/search?q=i%20love%20u&count=25&after=t3_1pwa6v')
+        end
+
+        it '拥有 q, count, before' do
+          pager_form.q = 'i love u'
+          pager_form.before = pager_form.after
+          pager_form.after = nil
+          expect(pager_form.pager_url).to eq('http://www.reddit.com/search?q=i%20love%20u&count=25&before=t3_1pwa6v')
+        end
+      end
     end
 
     context '解析 Reddit 网站访问的结果' do
