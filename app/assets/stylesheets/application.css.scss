@@ -1,2 +1,11 @@
 @import "welcome";
 @import "reddit";
+
+#logo {
+  background-image: url('http://easya.cc/img/logo1.png');
+  background-size: auto 40px;
+  background-repeat: no-repeat;
+  background-position: 0px 6px;
+  height: 50px;
+  width: 160px;
+}

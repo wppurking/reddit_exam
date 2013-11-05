@@ -4,19 +4,45 @@ class Reddit < ActiveRecord::Base
           'Accept-Encoding' => 'gzip'
 
   def reddits(form)
-    resp = self.class.get(form.url)
+    reddits_get(form.url)
+  end
+
+  def reddits_pager(form)
+    reddits_get(form.pager_url)
+  end
+
+  def reddits_get(url)
+    resp = self.class.get(url)
     if resp.code == 200
       doc = Nokogiri::HTML.parse(resp.body)
       links = doc.css('#siteTable .thing').map do |thing|
         body = {}
         body[:title] = thing.at_css('a.title').text
-        body[:url] = thing.at_css('a.title')['href']
         body[:score] = thing.at_css('.unvoted .unvoted').text
+        url = thing.at_css('a.title')['href']
+        body[:url] = if url.first == '/'
+                       'http://www.reddit.com' << url
+                     else
+                       url
+                     end
         body
       end
-      {body: links, next_page: doc.at_css('.nav-buttons .nextprev a')['href']}
+      {
+          body: links,
+          next_page: pager_url(doc, '.nav-buttons .nextprev a[rel~=next]'),
+          prev_page: pager_url(doc, '.nav-buttons .nextprev a[rel~=prev]')
+      }
     else
       {body: %w(链接有错误), next_page: '#'}
+    end
+  end
+
+  def pager_url(doc, selector)
+    link = doc.at_css(selector)
+    if link
+      link['href'].split('?')[1]
+    else
+      ''
     end
   end
 

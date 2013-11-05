@@ -16,27 +16,49 @@ describe Reddit do
     end
 
     context '解析 Reddit 网站访问的结果' do
-      before do
+      def init_reddit_resp(uri)
         resp = double("resp")
-        file = open('./spec/htmls/reddit.html').read
+        file = open(uri).read
         allow(resp).to receive(:body).and_return(file)
         allow(resp).to receive(:code).and_return(200)
         allow(Reddit).to receive(:get).and_return(resp)
       end
 
-      context '拥有关键字的' do
-        it '应该拥有 25 个结果' do
-          expect(Reddit.new.reddits(form_with_word)[:body].size).to eq(25)
-        end
+      it '应该拥有 25 个结果' do
+        expect(Reddit.new.reddits(form_with_word)[:body].size).to eq(25)
+      end
 
-        it '成功解析一个 Reddit' do
-          hash = Reddit.new.reddits(form_with_word)
-          reddit = hash[:body][0]
-          expect(reddit[:title]).to include('drawings, and diagrams.')
-          expect(reddit[:url]).to eq('http://imgur.com/a/uCSg1')
-          expect(reddit[:score]).to eq('3427')
-          expect(hash[:next_page]).to eq('http://www.reddit.com/?count=25&after=t3_1pudgz')
-        end
+      it '成功解析一个 Reddit, 有翻页' do
+        init_reddit_resp('./spec/htmls/reddit.html')
+        hash = Reddit.new.reddits(form_with_word)
+        reddit = hash[:body][0]
+        expect(reddit[:title]).to include('My coworker is a')
+        expect(reddit[:url]).to eq('http://memedad.com/memes/56357.jpg')
+        expect(reddit[:score]).to eq('2613')
+        expect(hash[:next_page]).to eq('count=50&after=t3_1pwgde')
+        expect(hash[:prev_page]).to eq('count=26&before=t3_1pwa6v')
+      end
+
+      it '成功解析一个 Reddit, 首页前一页' do
+        init_reddit_resp('./spec/htmls/reddit_home.html')
+        hash = Reddit.new.reddits(form_with_word)
+        reddit = hash[:body][0]
+        expect(reddit[:title]).to include('(x-post from r/stlouis)')
+        expect(reddit[:url]).to eq('http://i.imgur.com/UTBxFIt.png')
+        expect(reddit[:score]).to eq('3140')
+        expect(hash[:next_page]).to eq('count=25&after=t3_1pvo5s')
+        expect(hash[:prev_page]).to eq('')
+      end
+
+      it '成功解析一个 Reddit, 搜索页面' do
+        init_reddit_resp('./spec/htmls/reddit_search.html')
+        hash = Reddit.new.reddits(form_with_word)
+        reddit = hash[:body][0]
+        expect(reddit[:title]).to include('I have ever created (Java)')
+        expect(reddit[:url]).to eq('http://www.reddit.com/r/learnprogramming/comments/176iwa/i_give_you_the_best_200_assignments_i_have_ever/')
+        expect(reddit[:score]).to eq('1047')
+        expect(hash[:next_page]).to eq('q=java&count=50&after=t3_rt092')
+        expect(hash[:prev_page]).to eq('q=java&count=26&before=t3_176iwa')
       end
     end
 

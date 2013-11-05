@@ -6,6 +6,7 @@ RedditExam::Application.routes.draw do
 
   get '/example', to: 'reddit#index'
   post '/example', to: 'reddit#search'
+  get '/example/pager', to: 'reddit#pager'
 
 
   # Example of regular route:

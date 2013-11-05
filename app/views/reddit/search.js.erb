@@ -1,1 +1,12 @@
-$('#result').html('<%=j render :partial => "reddit/reddit", :locals => { result: @result} %>');
+$('#result').html('<%=j render :partial => "reddit/reddit", :locals => { msgs: @result[:body]} %>');
+
+var pager_html = "";
+<% unless @result[:prev_page].blank? %>
+pager_html += '<%=j link_to '‹ prev', example_pager_url << '?' << @result[:prev_page], class: 'prev', remote: true, disable_with: 'turn to..' %>';
+<% end %>
+
+<% unless @result[:next_page].blank? %>
+pager_html += '<%=j link_to 'next ›', example_pager_url << '?' << @result[:next_page], class: 'next', remote: true, disable_with: 'turn to..' %>';
+<% end %>
+
+$('.pager').html(pager_html);

@@ -18,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class='navbar-brand' href='<%= root_path %>'>Reddit Exam</a>
+      <%= link_to ' ', 'http://easya.cc', target: '_blank', class: 'navbar-brand', id: 'logo' %>
     </div>
 
     <nav class="collapse navbar-collapse" id="reddit-navbar">
@@ -34,5 +34,12 @@
   <%= yield %>
 </div>
 
+<div class='container'>
+  <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+
+    <p>Copyright © 2013 蓝拓电子商务有限公司</p>
+  </footer>
+</div>
 </body>
 </html>
