@@ -1,12 +1,15 @@
 <div class='row search'>
   <%= form_for @form, url: example_path, remote: true do |f| %>
-    <div class='col-md-3 col-sm-4 col-xs-9'>
+    <div class='col-md-3 col-sm-4 col-xs-6'>
       <%= f.text_field :search, class: 'form-control', placeholder: '留空可获取首页内容' %>
     </div>
-    <div class='col-md-1 col-sm-2 col-xs-3'>
+    <div class='col-md-1 col-sm-2 col-xs-2'>
       <%= f.submit '搜索', class: 'btn btn-info', disable_with: '提交中' %>
     </div>
   <% end %>
+  <div class='col-md-1 col-sm-2 col-xs-3 pull-right'>
+    <%= link_to 'Reddit', 'http://www.reddit.com', class: 'btn btn-success', target: '_blank', id: 'reddit_website' %>
+  </div>
 </div>
 
 <hr>

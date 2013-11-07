@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('.search').on('keyup', '#reddit_form_search', (e) ->
+    $search = $(@)
+    if $search.val()
+      $('#reddit_website').attr('href', "http://www.reddit.com/search?q=#{encodeURI($search.val())}")
+    else
+      console.log("http://www.reddit.com/")
+    false
+  )
