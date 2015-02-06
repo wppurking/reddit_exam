@@ -33,13 +33,13 @@ gem 'bootstrap-sass', '~> 3.0.0.0'
 gem 'httparty', '~> 0.12'
 
 gem 'puma'
+gem 'sqlite3'
 
 group :production do
   gem 'pg'
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'rspec-rails', '~> 2.14'
 end
 
