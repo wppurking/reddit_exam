@@ -35,13 +35,10 @@ end
 gem 'bootstrap-sass', '~> 3.0.0.0'
 gem 'httparty', '~> 0.12'
 
-group :production do
-  gem 'puma', '~> 2.6'
-end
+gem 'puma'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14'
-  gem 'thin', '~> 1.5'
 end
 
 group :test do
