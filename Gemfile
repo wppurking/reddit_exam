@@ -42,6 +42,7 @@ gem 'httparty', '~> 0.12'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14'
+  gem 'sqlite3'
 end
 
 group :test do
