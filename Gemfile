@@ -38,12 +38,14 @@ gem 'httparty', '~> 0.12'
 #gem 'puma'
 #gem 'sqlite3'
 
-#group :production do
-#  gem 'pg'
-#end
+# ----- for ninefold
+group :production do
+  gem 'pg'
+end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14'
+  gem 'sqlite3'
 end
 
 group :test do
